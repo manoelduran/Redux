@@ -1,8 +1,7 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { IProduct } from '../store/modules/cart/types';
+import CatalogItem from './CatalogItem';
 
 const Catalog: React.FC = () => {
   const [catalog, setCatalog] = useState<IProduct[]>([])
@@ -13,15 +12,12 @@ const Catalog: React.FC = () => {
     })
   }, [])
 
+
   return (
     <main>
       <h1>Catalog</h1>
       {catalog.map(product => (
-        <article key={product.id}>
-          <strong>{product.title}</strong> {" - "}
-          <span>{product.price}</span> {"  "}
-          <button type="button">Comprar</button>
-        </article>
+        <CatalogItem key={product.id} product={product} />
       ))}
     </main>
   );
